@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.login_button).setOnClickListener{
             val id = findViewById<EditText>(R.id.id_edit)
             val pw = findViewById<EditText>(R.id.pw_edit)
-            System.out.println("id:"+id+"pw:"+pw)
             if ("".equals(id.text.toString()) || "".equals(pw.text.toString())){
                 Toast.makeText(this,"아이디 혹은 비밀번호를 입력하세요.",Toast.LENGTH_SHORT).show()
                 if ("".equals(id.text.toString())) {
