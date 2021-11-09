@@ -13,15 +13,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewById<Button>(R.id.login_button).setOnClickListener{
-            val idText = findViewById<EditText>(R.id.id_edit).text.toString()
-            val pwText = findViewById<EditText>(R.id.pw_edit).text.toString()
-            if ("".equals(idText) || "".equals(pwText)){
+            val id = findViewById<EditText>(R.id.id_edit)
+            val pw = findViewById<EditText>(R.id.pw_edit)
+            System.out.println("id:"+id+"pw:"+pw)
+            if ("".equals(id.text.toString()) || "".equals(pw.text.toString())){
                 Toast.makeText(this,"아이디 혹은 비밀번호를 입력하세요.",Toast.LENGTH_SHORT).show()
+                if ("".equals(id.text.toString())) {
+                    id.requestFocus()
+                }
+                else if ("".equals(pw.text.toString())){
+                    pw.requestFocus()
+                }
             }
             else {
                 findViewById<TextView>(R.id.no_answer_textview).visibility= View.VISIBLE
             }
         }
+
 
 
 
