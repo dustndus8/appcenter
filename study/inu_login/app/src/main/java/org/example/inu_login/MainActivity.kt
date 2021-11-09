@@ -29,9 +29,5 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.no_answer_textview).visibility= View.VISIBLE
             }
         }
-
-
-
-
     }
 }
