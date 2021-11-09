@@ -2,6 +2,7 @@ package org.example.inu_login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
             val pwText = findViewById<EditText>(R.id.pw_edit).text.toString()
             if ("".equals(idText) || "".equals(pwText)){
                 Toast.makeText(this,"아이디 혹은 비밀번호를 입력하세요.",Toast.LENGTH_SHORT).show()
+            }
+            else {
+                findViewById<TextView>(R.id.no_answer_textview).visibility= View.VISIBLE
             }
         }
 
