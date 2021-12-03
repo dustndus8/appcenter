@@ -1,2 +1,3 @@
 rootProject.name = "inu_login"
 include ':app'
+include ':recyclerviewstudy'
