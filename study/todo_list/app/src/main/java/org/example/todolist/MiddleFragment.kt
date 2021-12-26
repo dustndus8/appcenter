@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import org.example.todolist.adapter.TodoAdapter
+import org.example.todolist.base.BaseFragment
 
-class MiddleFragment : Fragment(){
+class MiddleFragment : BaseFragment(){
+    override val layoutResourceId = R.layout.fragment_middle
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val textList = arrayListOf(
@@ -19,12 +22,5 @@ class MiddleFragment : Fragment(){
         )
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_middle)
         recyclerView?.adapter= TodoAdapter(textList)
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_middle, container, false)
     }
 }

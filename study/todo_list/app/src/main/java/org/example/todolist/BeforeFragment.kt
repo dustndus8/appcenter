@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import org.example.todolist.adapter.TodoAdapter
+import org.example.todolist.base.BaseFragment
 
-class BeforeFragment : Fragment(){
+class BeforeFragment : BaseFragment(){
+    override val layoutResourceId = R.layout.fragment_before
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val textList = arrayListOf(
@@ -18,12 +21,5 @@ class BeforeFragment : Fragment(){
         )
         val recyclerView = getView()?.findViewById<RecyclerView>(R.id.recyclerview_before)
         recyclerView?.adapter=TodoAdapter(textList)
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_before, container, false)
     }
 }
