@@ -19,9 +19,11 @@ class MainActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewpager)
         val pagerAdapter = PagerAdapter(this)
 
+        val tabName = listOf("시작 전","진행 중","완료")
+
         viewPager.adapter = pagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = "TAB ${(position + 1)}"
+            tab.text = "${(tabName[position])}"
         }.attach()
     }
     private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa){
