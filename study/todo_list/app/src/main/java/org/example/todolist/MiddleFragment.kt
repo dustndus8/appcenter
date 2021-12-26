@@ -17,9 +17,8 @@ class MiddleFragment : Fragment(){
             TodoAdapter.Text("으아아앙"),
             TodoAdapter.Text("진행중")
         )
-        Log.d("dmdkdk", "1234")
-//        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_middle)
-//        recyclerView?.adapter= TodoAdapter(textList) 왜 주석처리 했는데도 여기가 문제일까요
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_middle)
+        recyclerView?.adapter= TodoAdapter(textList)
     }
     override fun onCreateView(
         inflater: LayoutInflater,
