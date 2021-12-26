@@ -6,6 +6,10 @@ plugins {
 android {
     compileSdkVersion 30
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         configurations.all{
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0'}
