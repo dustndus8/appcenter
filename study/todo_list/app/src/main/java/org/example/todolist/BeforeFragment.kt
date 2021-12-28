@@ -20,6 +20,6 @@ class BeforeFragment : BaseFragment(){
             TodoAdapter.Text("뭐할까")
         )
         val recyclerView = getView()?.findViewById<RecyclerView>(R.id.recyclerview_before)
-        recyclerView?.adapter=TodoAdapter(textList)
+        recyclerView?.adapter=TodoAdapter(textList,1)
     }
 }

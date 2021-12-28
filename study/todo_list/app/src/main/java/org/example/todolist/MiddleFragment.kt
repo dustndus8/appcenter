@@ -21,6 +21,6 @@ class MiddleFragment : BaseFragment(){
             TodoAdapter.Text("진행중")
         )
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_middle)
-        recyclerView?.adapter= TodoAdapter(textList)
+        recyclerView?.adapter= TodoAdapter(textList,1)
     }
 }
