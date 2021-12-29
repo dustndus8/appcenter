@@ -15,12 +15,12 @@ class MiddleFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textList = arrayListOf(
-            TodoAdapter.Text("음냠냠"),
-            TodoAdapter.Text("으아아앙"),
-            TodoAdapter.Text("진행중")
-        )
+//        val textList = arrayListOf(
+//            TodoAdapter.Text("음냠냠"),
+//            TodoAdapter.Text("으아아앙"),
+//            TodoAdapter.Text("진행중")
+//        )
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_middle)
-        recyclerView?.adapter= TodoAdapter(textList,1)
+        //recyclerView?.adapter= TodoAdapter(textList,1)
     }
 }

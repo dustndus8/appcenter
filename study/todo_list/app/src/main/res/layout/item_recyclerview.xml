@@ -16,7 +16,7 @@
         android:paddingVertical="16dp"/>
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/imageButton_rectangle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
