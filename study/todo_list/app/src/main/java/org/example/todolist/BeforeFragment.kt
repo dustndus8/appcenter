@@ -23,7 +23,8 @@ class BeforeFragment : Fragment(){
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var mTodoAdapter: TodoAdapter
     private val mTodoItems: ArrayList<TodoModel> = ArrayList()
-    private lateinit var imageButton: ImageButton
+    private lateinit var imageButtonAdd: ImageButton
+    private lateinit var imageButtonRectangle: ImageButton
     private lateinit var todoText: String
     private lateinit var editText: EditText
 
@@ -40,19 +41,29 @@ class BeforeFragment : Fragment(){
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_before)
         initRecyclerView(recyclerView)
         initViewModel()
+
+        // ADD 버튼 클릭 시 데이터 추가
         editText = root.findViewById(R.id.todo_text_before)
-        imageButton = root.findViewById(R.id.imageButton_add)
-        imageButton.setOnClickListener {
+        imageButtonAdd = root.findViewById(R.id.imageButton_add)
+        imageButtonAdd.setOnClickListener {
             todoText = editText.text.toString()
-            mTodoViewModel.insertTodo(TodoModel(null, todoText))
+            mTodoViewModel.insertTodo(TodoModel(null, todoText,"BEFORE"))
             Log.d("BUTTON","button")
         }
+
+        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: TodoModel, pos: Int) {
+                mTodoViewModel.updateTodoBeforeToMiddle(data.id)
+                Log.d("BUTTON","checkbox")
+            }
+        })
+
         return root
     }
 
     private fun initViewModel() {
         mTodoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(TodoViewModel::class.java)
-        mTodoViewModel.getTodoList().observe(viewLifecycleOwner, Observer {
+        mTodoViewModel.getTodoBeforeList().observe(viewLifecycleOwner, Observer {
             mTodoAdapter.setTodoItems(it)
         })
     }

@@ -1,10 +1,12 @@
 package org.example.todolist.adapter
 
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.example.todolist.R
@@ -30,10 +32,26 @@ class TodoAdapter(val i: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun getItemCount(): Int=todoItems.size
 
     inner class TodoViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val todo_text = view.findViewById<TextView>(R.id.todo_text)
+        val todo_text = itemView.findViewById<TextView>(R.id.todo_text)
+        val imageButtonRectangle = itemView.findViewById<ImageButton>(R.id.imageButton_rectangle)
         fun bind(todoModel: TodoModel){
             todo_text.text= todoModel.description
+            val pos = adapterPosition
+            if(pos!= RecyclerView.NO_POSITION)
+            {
+                imageButtonRectangle.setOnClickListener {
+                    listener?.onItemClick(itemView,todoModel,pos)
+                }
+            }
         }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(v:View, data: TodoModel, pos : Int)
+    }
+    private var listener : OnItemClickListener? = null
+    fun setOnItemClickListener(listener : OnItemClickListener) {
+        this.listener = listener
     }
 
     fun setRecyclerView(position: Int?): Int {

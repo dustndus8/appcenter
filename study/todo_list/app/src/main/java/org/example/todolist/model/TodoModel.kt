@@ -10,6 +10,8 @@ data class TodoModel (
     var id: Long?,
     @ColumnInfo(name = "description")
     var description: String,
-    ) { constructor(): this(null, "")
+    @ColumnInfo(name = "status")
+    var status: String
+    ) { constructor(): this(null, "","")
 }
 
