@@ -41,6 +41,12 @@ class TodoRepository(application: Application) {
         }).start()
     }
 
+    fun deleteTodo(todoModelID: Long?){
+        Thread(Runnable {
+            mTodoDAO.deleteTodo(todoModelID)
+        }).start()
+    }
+
     fun updateTodoBeforeToMiddle(todoModelID: Long?){
         Thread(Runnable {
             mTodoDAO.updateTodoBeforeToMiddle(todoModelID)

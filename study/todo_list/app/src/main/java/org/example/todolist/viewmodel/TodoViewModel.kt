@@ -24,6 +24,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         mTodoRepository.insertTodo(todoModel)
     }
 
+    fun deleteTodo(todoModelID: Long?) {
+        mTodoRepository.deleteTodo(todoModelID)
+    }
+
     fun getTodoBeforeList(): LiveData<List<TodoModel>> {
         return mTodoItems
     }

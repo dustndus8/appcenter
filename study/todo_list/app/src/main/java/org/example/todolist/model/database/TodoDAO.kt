@@ -2,6 +2,7 @@ package org.example.todolist.model.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import org.example.todolist.model.TodoModel
@@ -25,6 +26,9 @@ interface TodoDAO {
 
     @Query("SELECT * from Todo where status = 'AFTER'")
     fun getTodoAfterList(): LiveData<List<TodoModel>>
+
+    @Query("DELETE FROM Todo where id = :todoModelID")
+    fun deleteTodo(todoModelID: Long?)
 
 
 }

@@ -17,7 +17,7 @@ import org.example.todolist.base.BaseFragment
 import org.example.todolist.model.TodoModel
 import org.example.todolist.viewmodel.TodoViewModel
 
-class MiddleFragment : Fragment() {
+class MiddleFragment : BaseFragment() {
     //override val layoutResourceId = R.layout.fragment_middle
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var mTodoAdapter: TodoAdapter
@@ -27,9 +27,6 @@ class MiddleFragment : Fragment() {
     private lateinit var todoText: String
     private lateinit var editText: EditText
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +42,7 @@ class MiddleFragment : Fragment() {
         mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.updateTodoMiddleToAfter(data.id)
+                mTodoAdapter.setTodoItems(mTodoItems)
                 Log.d("BUTTON","checkbox")
             }
         })

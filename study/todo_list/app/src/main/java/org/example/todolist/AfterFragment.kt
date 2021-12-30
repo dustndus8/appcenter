@@ -19,7 +19,7 @@ import org.example.todolist.base.BaseFragment
 import org.example.todolist.model.TodoModel
 import org.example.todolist.viewmodel.TodoViewModel
 
-class AfterFragment : Fragment(){
+class AfterFragment : BaseFragment(){
     //override val layoutResourceId = R.layout.fragment_after
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var mTodoAdapter: TodoAdapter
@@ -29,9 +29,7 @@ class AfterFragment : Fragment(){
     private lateinit var imageButtonDelete: ImageButton
     private lateinit var todoText: String
     private lateinit var editText: EditText
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +39,15 @@ class AfterFragment : Fragment(){
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_after)
         initRecyclerView(recyclerView)
         initViewModel()
+
+        // 체크박스 클릭 시 진행중으로 데이터 이동
+        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: TodoModel, pos: Int) {
+                mTodoViewModel.deleteTodo(data.id)
+                mTodoAdapter.setTodoItems(mTodoItems)
+                Log.d("BUTTON","deletebox")
+            }
+        })
 
         return root
     }
