@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_btn_background"
+        app:srcCompat="@drawable/ic_baseline_check_box_outline_blank_24"
         android:background="@android:color/transparent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

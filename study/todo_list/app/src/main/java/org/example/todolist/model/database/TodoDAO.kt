@@ -20,4 +20,11 @@ interface TodoDAO {
     @Query("UPDATE Todo SET status = 'MIDDLE' WHERE status = 'BEFORE' and id = :todoModelID")
     fun updateTodoBeforeToMiddle(todoModelID: Long?)
 
+    @Query("UPDATE Todo SET status = 'AFTER' WHERE status = 'MIDDLE' and id = :todoModelID")
+    fun updateTodoMiddleToAfter(todoModelID: Long?)
+
+    @Query("SELECT * from Todo where status = 'AFTER'")
+    fun getTodoAfterList(): LiveData<List<TodoModel>>
+
+
 }

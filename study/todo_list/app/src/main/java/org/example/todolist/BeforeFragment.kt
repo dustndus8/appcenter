@@ -51,6 +51,7 @@ class BeforeFragment : Fragment(){
             Log.d("BUTTON","button")
         }
 
+        // 체크박스 클릭 시 진행중으로 데이터 이동
         mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.updateTodoBeforeToMiddle(data.id)
@@ -69,7 +70,7 @@ class BeforeFragment : Fragment(){
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
-        mTodoAdapter=TodoAdapter(1)
+        mTodoAdapter=TodoAdapter()
         rcv.run{
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)

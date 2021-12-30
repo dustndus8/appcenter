@@ -29,8 +29,6 @@ class MiddleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_middle)
-        //recyclerView?.adapter= TodoAdapter(textList,1)
     }
 
     override fun onCreateView(
@@ -42,6 +40,14 @@ class MiddleFragment : Fragment() {
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_middle)
         initRecyclerView(recyclerView)
         initViewModel()
+
+        // 체크박스 클릭 시 완료로 데이터 이동
+        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: TodoModel, pos: Int) {
+                mTodoViewModel.updateTodoMiddleToAfter(data.id)
+                Log.d("BUTTON","checkbox")
+            }
+        })
 
         return root
     }
@@ -58,7 +64,7 @@ class MiddleFragment : Fragment() {
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
-        mTodoAdapter = TodoAdapter(1)
+        mTodoAdapter = TodoAdapter()
         rcv.run {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)

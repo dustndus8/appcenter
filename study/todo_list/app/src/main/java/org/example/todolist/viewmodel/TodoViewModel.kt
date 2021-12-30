@@ -10,11 +10,14 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     private val mTodoRepository: TodoRepository
     private var mTodoItems: LiveData<List<TodoModel>>
     private var mTodoItemsMiddle: LiveData<List<TodoModel>>
+    private var mTodoItemsAfter: LiveData<List<TodoModel>>
 
     init {
         mTodoRepository = TodoRepository(application)
         mTodoItems = mTodoRepository.getTodoBeforeList()
         mTodoItemsMiddle = mTodoRepository.getTodoMiddleList()
+        mTodoItemsAfter = mTodoRepository.getTodoAfterList()
+
     }
 
     fun insertTodo(todoModel: TodoModel) {
@@ -29,8 +32,16 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         return mTodoItemsMiddle
     }
 
+    fun getTodoAfterList(): LiveData<List<TodoModel>>{
+        return mTodoItemsAfter
+    }
+
     fun updateTodoBeforeToMiddle(todoModelID: Long?) {
         mTodoRepository.updateTodoBeforeToMiddle(todoModelID)
+    }
+
+    fun updateTodoMiddleToAfter(todoModelID: Long?){
+        mTodoRepository.updateTodoMiddleToAfter(todoModelID)
     }
 
 }
