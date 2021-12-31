@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.content.res.AppCompatResources
@@ -37,6 +38,7 @@ class AfterFragment : BaseFragment(){
     ): View? {
         var root = inflater.inflate(R.layout.fragment_after, container, false)
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_after)
+        val animation = AnimationUtils.loadAnimation(context,R.anim.fade_out)
         initRecyclerView(recyclerView)
         initViewModel()
 
@@ -44,7 +46,6 @@ class AfterFragment : BaseFragment(){
         mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.deleteTodo(data.id)
-                mTodoAdapter.setTodoItems(mTodoItems)
                 Log.d("BUTTON","deletebox")
             }
         })
@@ -53,25 +54,28 @@ class AfterFragment : BaseFragment(){
     }
 
     private fun initViewModel() {
+        Log.d("AFTERFragment","initviewmodel")
         mTodoViewModel =
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
                 .create(
                     TodoViewModel::class.java
                 )
         mTodoViewModel.getTodoAfterList().observe(viewLifecycleOwner, Observer {
+            Log.d("AFTERFragment-observe",it.size.toString())
             mTodoAdapter.setTodoItems(it)
         })
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
+        Log.d("AFTERFragment","initRecyclerView")
         val imageButtonDelete = rcv.findViewById<ImageButton>(R.id.imageButton_delete)
         mTodoAdapter = TodoAdapter()
         rcv.run {
+            Log.d("AFTERFragment","initRecyclerView-run")
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = mTodoAdapter
             imageButtonDelete?.setImageResource(R.drawable.ic_baseline_check_box_outline_blank_24)
-
         }
     }
 }

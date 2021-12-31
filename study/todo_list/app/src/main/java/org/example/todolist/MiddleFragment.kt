@@ -42,7 +42,6 @@ class MiddleFragment : BaseFragment() {
         mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.updateTodoMiddleToAfter(data.id)
-                mTodoAdapter.setTodoItems(mTodoItems)
                 Log.d("BUTTON","checkbox")
             }
         })
@@ -51,19 +50,23 @@ class MiddleFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
+        Log.d("MIDDLEFragment","initviewmodel")
         mTodoViewModel =
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
                 .create(
                     TodoViewModel::class.java
                 )
         mTodoViewModel.getTodoMiddleList().observe(viewLifecycleOwner, Observer {
+            Log.d("MIDDLEFragment-observe",it.size.toString())
             mTodoAdapter.setTodoItems(it)
         })
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
+        Log.d("MIDDLEFragment","initRecyclerView")
         mTodoAdapter = TodoAdapter()
         rcv.run {
+            Log.d("MIDDLEFragment","initRecyclerView-run")
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = mTodoAdapter
