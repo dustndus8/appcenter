@@ -38,7 +38,6 @@ class AfterFragment : BaseFragment(){
     ): View? {
         var root = inflater.inflate(R.layout.fragment_after, container, false)
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_after)
-        val animation = AnimationUtils.loadAnimation(context,R.anim.fade_out)
         initRecyclerView(recyclerView)
         initViewModel()
 

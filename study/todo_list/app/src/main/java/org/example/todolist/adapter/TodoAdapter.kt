@@ -1,5 +1,7 @@
 package org.example.todolist.adapter
 
+import android.graphics.Color
+import android.graphics.Paint
 import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,9 +47,12 @@ class TodoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class TodoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val todo_text = itemView.findViewById<TextView>(R.id.todo_text)
         val imageButtonRectangle = itemView.findViewById<ImageButton>(R.id.imageButton_rectangle)
-
         fun bind(todoModel: TodoModel) {
             todo_text?.text = todoModel.description
+            if (itemViewType==1){
+                todo_text.paintFlags = todo_text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                todo_text.setTextColor(Color.parseColor("#808080"))
+            }
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
                 imageButtonRectangle?.setOnClickListener {
@@ -66,14 +71,6 @@ class TodoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         Log.d("Adapter", "setonitemclicklistener")
         this.listener = listener
     }
-
-    /*fun setRecyclerView(position: Int?): Int {
-        when (position) {
-            1 -> return R.layout.item_recyclerview
-            2 -> return R.layout.item_recyclerview_after
-            else -> return R.layout.item_recyclerview
-        }
-    }*/
 
     fun setTodoItems(todoItems: List<TodoModel>) {
         this.todoItems = todoItems

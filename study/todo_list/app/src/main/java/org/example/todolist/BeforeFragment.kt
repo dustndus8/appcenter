@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import org.example.todolist.adapter.TodoAdapter
 import org.example.todolist.base.BaseFragment
 import org.example.todolist.model.TodoModel
@@ -27,6 +28,7 @@ class BeforeFragment : BaseFragment(){
     private lateinit var imageButtonRectangle: ImageButton
     private lateinit var todoText: String
     private lateinit var editText: EditText
+    private lateinit var tabLayout: TabLayout
 
 
     override fun onCreateView(
@@ -36,6 +38,7 @@ class BeforeFragment : BaseFragment(){
     ): View? {
         var root = inflater.inflate(R.layout.fragment_before, container, false)
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_before)
+        var tabLayout = root.findViewById<TabLayout>(R.id.tabs)
         initRecyclerView(recyclerView)
         initViewModel()
 
@@ -56,7 +59,6 @@ class BeforeFragment : BaseFragment(){
                 Log.d("BUTTON","checkbox")
             }
         })
-
         return root
     }
 
