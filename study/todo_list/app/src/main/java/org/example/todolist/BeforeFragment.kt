@@ -46,6 +46,7 @@ class BeforeFragment : BaseFragment(){
             todoText = editText.text.toString()
             mTodoViewModel.insertTodo(TodoModel(null, todoText,"BEFORE"))
             Log.d("BUTTON","button")
+            editText.text = null
         }
 
         // 체크박스 클릭 시 진행중으로 데이터 이동

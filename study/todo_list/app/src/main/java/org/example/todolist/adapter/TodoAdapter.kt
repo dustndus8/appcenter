@@ -18,14 +18,23 @@ import kotlin.collections.ArrayList
 class TodoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var todoItems: List<TodoModel> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("Adapter","oncreateviewholder")
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_recyclerview, parent, false)
+        Log.d("Adapter", "oncreateviewholder")
+        val view = when (viewType){
+            1 -> LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_recyclerview_after, parent, false)
+            else -> LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_recyclerview, parent, false)
+        }
         return TodoViewHolder(view)
     }
 
+    override fun getItemViewType(position: Int): Int {
+        val todoModel = todoItems[position]
+        return if (todoModel.status == "AFTER") 1 else 0
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("Adapter","onbindviewholder")
+        Log.d("Adapter-onbind", todoItems.size.toString())
         val todoModel = todoItems[position]
         val todoViewHolder = holder as TodoViewHolder
         todoViewHolder.bind(todoModel)
@@ -36,6 +45,7 @@ class TodoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class TodoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val todo_text = itemView.findViewById<TextView>(R.id.todo_text)
         val imageButtonRectangle = itemView.findViewById<ImageButton>(R.id.imageButton_rectangle)
+
         fun bind(todoModel: TodoModel) {
             todo_text?.text = todoModel.description
             val pos = adapterPosition
@@ -53,7 +63,7 @@ class TodoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listener: OnItemClickListener? = null
     fun setOnItemClickListener(listener: OnItemClickListener) {
-        Log.d("Adapter","setonitemclicklistener")
+        Log.d("Adapter", "setonitemclicklistener")
         this.listener = listener
     }
 

@@ -42,10 +42,10 @@ class AfterFragment : BaseFragment(){
         initRecyclerView(recyclerView)
         initViewModel()
 
-        // 체크박스 클릭 시 진행중으로 데이터 이동
+        // 체크박스 클릭 시 데이터 삭제
         mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
-                mTodoViewModel.deleteTodo(data.id)
+                mTodoViewModel.deleteTodo(data)
                 Log.d("BUTTON","deletebox")
             }
         })
@@ -68,14 +68,13 @@ class AfterFragment : BaseFragment(){
 
     private fun initRecyclerView(rcv: RecyclerView) {
         Log.d("AFTERFragment","initRecyclerView")
-        val imageButtonDelete = rcv.findViewById<ImageButton>(R.id.imageButton_delete)
+        val imageButtonDelete = rcv.findViewById<ImageButton>(R.id.imageButton_rectangle)
         mTodoAdapter = TodoAdapter()
         rcv.run {
             Log.d("AFTERFragment","initRecyclerView-run")
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = mTodoAdapter
-            imageButtonDelete?.setImageResource(R.drawable.ic_baseline_check_box_outline_blank_24)
         }
     }
 }

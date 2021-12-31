@@ -41,9 +41,9 @@ class TodoRepository(application: Application) {
         }).start()
     }
 
-    fun deleteTodo(todoModelID: Long?){
+    fun deleteTodo(todoModel: TodoModel){
         Thread(Runnable {
-            mTodoDAO.deleteTodo(todoModelID)
+            mTodoDAO.deleteTodo(todoModel)
         }).start()
     }
 
