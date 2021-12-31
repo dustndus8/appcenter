@@ -21,17 +21,18 @@ class MainActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewpager)
         val pagerAdapter = PagerAdapter(this)
 
-        val tabName = listOf("시작 전","진행 중","완료")
+        val tabName = listOf("시작 전", "진행 중", "완료")
 
         viewPager.adapter = pagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = "${(tabName[position])}"
         }.attach()
     }
-    private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa){
+
+    private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = 3
         override fun createFragment(position: Int): Fragment {
-            return when (position){
+            return when (position) {
                 0 -> BeforeFragment()
                 1 -> MiddleFragment()
                 else -> AfterFragment()

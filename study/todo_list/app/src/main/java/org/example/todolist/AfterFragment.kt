@@ -20,16 +20,10 @@ import org.example.todolist.base.BaseFragment
 import org.example.todolist.model.TodoModel
 import org.example.todolist.viewmodel.TodoViewModel
 
-class AfterFragment : BaseFragment(){
+class AfterFragment : BaseFragment() {
     //override val layoutResourceId = R.layout.fragment_after
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var mTodoAdapter: TodoAdapter
-    private val mTodoItems: ArrayList<TodoModel> = ArrayList()
-    private lateinit var imageButtonAdd: ImageButton
-    private lateinit var imageButtonRectangle: ImageButton
-    private lateinit var imageButtonDelete: ImageButton
-    private lateinit var todoText: String
-    private lateinit var editText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,10 +36,11 @@ class AfterFragment : BaseFragment(){
         initViewModel()
 
         // 체크박스 클릭 시 데이터 삭제
-        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
+        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.deleteTodo(data)
-                Log.d("BUTTON","deletebox")
+
+                Log.d("BUTTON", "deletebox")
             }
         })
 
@@ -53,24 +48,23 @@ class AfterFragment : BaseFragment(){
     }
 
     private fun initViewModel() {
-        Log.d("AFTERFragment","initviewmodel")
+        Log.d("AFTERFragment", "initviewmodel")
         mTodoViewModel =
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
                 .create(
                     TodoViewModel::class.java
                 )
         mTodoViewModel.getTodoAfterList().observe(viewLifecycleOwner, Observer {
-            Log.d("AFTERFragment-observe",it.size.toString())
+            Log.d("AFTERFragment-observe", it.size.toString())
             mTodoAdapter.setTodoItems(it)
         })
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
-        Log.d("AFTERFragment","initRecyclerView")
-        val imageButtonDelete = rcv.findViewById<ImageButton>(R.id.imageButton_rectangle)
+        Log.d("AFTERFragment", "initRecyclerView")
         mTodoAdapter = TodoAdapter()
         rcv.run {
-            Log.d("AFTERFragment","initRecyclerView-run")
+            Log.d("AFTERFragment", "initRecyclerView-run")
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = mTodoAdapter

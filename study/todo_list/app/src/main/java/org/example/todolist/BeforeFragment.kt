@@ -1,6 +1,7 @@
 package org.example.todolist
 
 import android.app.Application
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,18 +21,15 @@ import org.example.todolist.base.BaseFragment
 import org.example.todolist.model.TodoModel
 import org.example.todolist.viewmodel.TodoViewModel
 
-class BeforeFragment : BaseFragment(){
+class BeforeFragment : BaseFragment() {
     //override val layoutResourceId = R.layout.fragment_before
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var mTodoAdapter: TodoAdapter
-    private val mTodoItems: ArrayList<TodoModel> = ArrayList()
     private lateinit var imageButtonAdd: ImageButton
-    private lateinit var imageButtonRectangle: ImageButton
     private lateinit var todoText: String
     private lateinit var editText: EditText
-    private lateinit var tabLayout: TabLayout
 
-
+    @Override
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +37,6 @@ class BeforeFragment : BaseFragment(){
     ): View? {
         var root = inflater.inflate(R.layout.fragment_before, container, false)
         var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_before)
-        var tabLayout = root.findViewById<TabLayout>(R.id.tabs)
         initRecyclerView(recyclerView)
         initViewModel()
 
@@ -47,39 +45,40 @@ class BeforeFragment : BaseFragment(){
         imageButtonAdd = root.findViewById(R.id.imageButton_add)
         imageButtonAdd.setOnClickListener {
             todoText = editText.text.toString()
-            mTodoViewModel.insertTodo(TodoModel(null, todoText,"BEFORE"))
-            Log.d("BUTTON","button")
+            mTodoViewModel.insertTodo(TodoModel(null, todoText, "BEFORE"))
+            Log.d("BUTTON", "button")
             editText.text = null
         }
 
         // 체크박스 클릭 시 진행중으로 데이터 이동
-        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
+        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.updateTodoBeforeToMiddle(data.id)
-                Log.d("BUTTON","checkbox")
+                Log.d("BUTTON", "checkbox")
             }
         })
         return root
     }
 
     private fun initViewModel() {
-        Log.d("BEFOREFragment","initviewmodel")
-        mTodoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(TodoViewModel::class.java)
+        Log.d("BEFOREFragment", "initviewmodel")
+        mTodoViewModel =
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+                .create(TodoViewModel::class.java)
         mTodoViewModel.getTodoBeforeList().observe(viewLifecycleOwner, Observer {
-            Log.d("BEFOREFragment-observe",it.size.toString())
+            Log.d("BEFOREFragment-observe", it.size.toString())
             mTodoAdapter.setTodoItems(it)
         })
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
-        Log.d("BEFOREFragment","initRecyclerView")
-        mTodoAdapter=TodoAdapter()
-        rcv.run{
-            Log.d("BEFOREFragment","initRecyclerView-run")
+        Log.d("BEFOREFragment", "initRecyclerView")
+        mTodoAdapter = TodoAdapter()
+        rcv.run {
+            Log.d("BEFOREFragment", "initRecyclerView-run")
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = mTodoAdapter
         }
-
     }
 }

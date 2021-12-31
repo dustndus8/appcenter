@@ -13,7 +13,6 @@ class TodoRepository(application: Application) {
     private var mTodoItemsMiddle: LiveData<List<TodoModel>>
     private var mTodoItemsAfter: LiveData<List<TodoModel>>
 
-
     init {
         mTodoDatabase = TodoDatabase.getInstance(application)
         mTodoDAO = mTodoDatabase.todoDao()
@@ -26,14 +25,13 @@ class TodoRepository(application: Application) {
         return mTodoItems
     }
 
-    fun getTodoMiddleList(): LiveData<List<TodoModel>>{
+    fun getTodoMiddleList(): LiveData<List<TodoModel>> {
         return mTodoItemsMiddle
     }
 
-    fun getTodoAfterList(): LiveData<List<TodoModel>>{
+    fun getTodoAfterList(): LiveData<List<TodoModel>> {
         return mTodoItemsAfter
     }
-
 
     fun insertTodo(todoModel: TodoModel) {
         Thread(Runnable {
@@ -41,19 +39,19 @@ class TodoRepository(application: Application) {
         }).start()
     }
 
-    fun deleteTodo(todoModel: TodoModel){
+    fun deleteTodo(todoModel: TodoModel) {
         Thread(Runnable {
             mTodoDAO.deleteTodo(todoModel)
         }).start()
     }
 
-    fun updateTodoBeforeToMiddle(todoModelID: Long?){
+    fun updateTodoBeforeToMiddle(todoModelID: Long?) {
         Thread(Runnable {
             mTodoDAO.updateTodoBeforeToMiddle(todoModelID)
         }).start()
     }
 
-    fun updateTodoMiddleToAfter(todoModelID: Long?){
+    fun updateTodoMiddleToAfter(todoModelID: Long?) {
         Thread(Runnable {
             mTodoDAO.updateTodoMiddleToAfter(todoModelID)
         }).start()

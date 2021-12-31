@@ -27,7 +27,6 @@ class MiddleFragment : BaseFragment() {
     private lateinit var todoText: String
     private lateinit var editText: EditText
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,34 +38,33 @@ class MiddleFragment : BaseFragment() {
         initViewModel()
 
         // 체크박스 클릭 시 완료로 데이터 이동
-        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener{
+        mTodoAdapter.setOnItemClickListener(object : TodoAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.updateTodoMiddleToAfter(data.id)
-                Log.d("BUTTON","checkbox")
+                Log.d("BUTTON", "checkbox")
             }
         })
-
         return root
     }
 
     private fun initViewModel() {
-        Log.d("MIDDLEFragment","initviewmodel")
+        Log.d("MIDDLEFragment", "initviewmodel")
         mTodoViewModel =
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
                 .create(
                     TodoViewModel::class.java
                 )
         mTodoViewModel.getTodoMiddleList().observe(viewLifecycleOwner, Observer {
-            Log.d("MIDDLEFragment-observe",it.size.toString())
+            Log.d("MIDDLEFragment-observe", it.size.toString())
             mTodoAdapter.setTodoItems(it)
         })
     }
 
     private fun initRecyclerView(rcv: RecyclerView) {
-        Log.d("MIDDLEFragment","initRecyclerView")
+        Log.d("MIDDLEFragment", "initRecyclerView")
         mTodoAdapter = TodoAdapter()
         rcv.run {
-            Log.d("MIDDLEFragment","initRecyclerView-run")
+            Log.d("MIDDLEFragment", "initRecyclerView-run")
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = mTodoAdapter
