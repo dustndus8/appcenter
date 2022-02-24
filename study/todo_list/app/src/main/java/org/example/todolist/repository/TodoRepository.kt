@@ -34,27 +34,27 @@ class TodoRepository(application: Application) {
     }
 
     fun insertTodo(todoModel: TodoModel) {
-        Thread(Runnable {
+        Thread{
             mTodoDAO.insertTodo(todoModel)
-        }).start()
+        }.start()
     }
 
     fun deleteTodo(todoModel: TodoModel) {
-        Thread(Runnable {
+        Thread{
             mTodoDAO.deleteTodo(todoModel)
-        }).start()
+        }.start()
     }
 
     fun updateTodoBeforeToMiddle(todoModelID: Long?) {
-        Thread(Runnable {
+        Thread{
             mTodoDAO.updateTodoBeforeToMiddle(todoModelID)
-        }).start()
+        }.start()
     }
 
     fun updateTodoMiddleToAfter(todoModelID: Long?) {
-        Thread(Runnable {
+        Thread{
             mTodoDAO.updateTodoMiddleToAfter(todoModelID)
-        }).start()
+        }.start()
     }
 
 }

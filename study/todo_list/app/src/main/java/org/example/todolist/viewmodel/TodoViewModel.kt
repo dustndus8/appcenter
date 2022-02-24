@@ -17,7 +17,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         mTodoItems = mTodoRepository.getTodoBeforeList()
         mTodoItemsMiddle = mTodoRepository.getTodoMiddleList()
         mTodoItemsAfter = mTodoRepository.getTodoAfterList()
-
     }
 
     fun insertTodo(todoModel: TodoModel) {
